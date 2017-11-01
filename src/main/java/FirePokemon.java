@@ -1,3 +1,5 @@
+import Pokemon.PokemonType;
+
 /**
  * Our specialty FirePokemon that inherits from our Pokemon class.
  */
@@ -58,7 +60,19 @@ public class FirePokemon extends Pokemon {
      * Implement this.
      */
     public boolean attack(final Pokemon opponent) {
-        return false;
-    }
+        if (super.attack(opponent)) {
+            return true;
+        }
+        if (opponent.pokeType == PokemonType.ELECTRIC) {
+            return false;
+        }
+        if (this.specProb < Math.random()) {
+            return false;
+        }
+        opponent.setHitPoints(0);
+        System.out.println(this.getName() + " executes a specialty attack..." + this.specialtyAttack + "!!!");
+        System.out.println(opponent.getName() + " has been defeated!");
 
+        return true;
+    }
 }
